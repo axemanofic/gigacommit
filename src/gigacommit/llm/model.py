@@ -4,7 +4,7 @@ from gigachat.models import MessagesRole
 from gigachat.models.messages import Messages
 
 if TYPE_CHECKING:
-    from src.config.config import Config
+    from gigacommit.config.config import Config
 
 from .prompts import paylaod
 

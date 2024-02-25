@@ -1,6 +1,6 @@
 import typer
 
-from src.config.config import AppContext
+from gigacommit.config.config import AppContext
 
 
 app = typer.Typer()

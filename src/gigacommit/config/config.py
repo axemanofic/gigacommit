@@ -5,7 +5,7 @@ import typer
 import rtoml
 from platformdirs import user_config_dir
 
-from .schema import AppSchema, GigachatSchema
+from .schema import AppSchema, Model, ModelChat, ModelSettings
 
 CONFIG_DIR = Path(user_config_dir(appname="gigacommit", appauthor=False, roaming=True))
 
@@ -25,7 +25,7 @@ class TomlFile:
 
 
 class Config:
-    _default_config = AppSchema(gigachat=GigachatSchema())
+    _default_config = AppSchema()
 
     _config: Optional[dict[str, Any]] = None
 
@@ -65,6 +65,7 @@ class Config:
     def load(self):
         config_file = TomlFile(CONFIG_DIR / "config.toml")
         config_dict = config_file.read()
+        print(type(config_dict))
         config_schema = AppSchema(**config_dict)
         self._config = config_schema.model_dump()
         return self
@@ -74,7 +75,8 @@ class Config:
         if not CONFIG_DIR.exists():
             CONFIG_DIR.mkdir()
         if not cls._config_file.exists():
-            cls._config_file.write(cls._default_config.model_dump())
+            model_dict = cls._default_config.dict() 
+            cls._config_file.write(model_dict)
         return cls()
 
 
