@@ -1,7 +1,7 @@
 import typer
 
 
-from gigacommit.config.config import AppContext
+from gigacommit.callbacks import AppContext
 from gigacommit.llm.model import GptModel
 
 from gigacommit.git import get_diff
